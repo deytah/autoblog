@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AutoBlog
-Version: 4.1.1
+Version: 5.0.0
 Plugin URI: http://premium.wpmudev.org/project/autoblog
 Description: This plugin automatically posts content from RSS feeds to different blogs on your WordPress Multisite...
 Author: WPMU DEV
@@ -45,7 +45,12 @@ function autoblog_encode_url_component( $matches ) {
 	return urlencode( $matches[0] );
 }
 
-require_once dirname( __FILE__ ) . '/autoblogincludes/extra/wpmudev-dash-notification.php';
+require __DIR__ . '/plugin-update-checker/plugin-update-checker.php';
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+    'https://plugins.deytah.io/plugins/?action=get_metadata&slug=autoblogpremium',
+    __FILE__,
+    'autoblogpremium'
+);
 
 /**
  * Parses URL addresses contained multibyte characters.
